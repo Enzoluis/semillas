@@ -1,0 +1,35 @@
+import parcelas.*
+import plantas.*
+describe "Test de las Parcelas" {
+	 const parcela = new Ecologica(ancho=20, largo=1, solHoras=8)
+	 const s1 = new Soja(altura=1.1, anioCosecha= 2009)
+	 const s2 = new Soja(altura=1.2, anioCosecha= 2009)
+	 const s3 = new Soja(altura=1.1, anioCosecha= 2009)
+	 const s4 = new Soja(altura=1.3, anioCosecha= 2009)
+	 const m1 = new Menta(altura=1,anioCosecha=2007)
+	 
+	 method initialize() {
+	 	parcela.agregarCultivo(s1)
+	 	parcela.agregarCultivo(s2)
+	 	parcela.agregarCultivo(s3)
+	 	parcela.agregarCultivo(s4)
+	 }
+	 
+	 
+	 test "Superficio 20 metros de parcela" {
+	 	assert.equals(20, parcela.superficie())
+	 }
+	 
+	 test "Soporta 4 plantas" {
+	 	assert.equals(4, parcela.maxCultivos())
+	 }
+	
+	 test "No tiene cultivos complicados" {
+	 	assert.notThat( parcela.cultivoComplicado())
+	 }
+	 
+	 test "Tiene cultivos complicados" {
+	 	assert.throwsExceptionWithMessage("ERROR: Ups!!! No se pueden agregar más cultivos", {parcela.agregarCultivo(m1)})
+	 }
+	 
+}
