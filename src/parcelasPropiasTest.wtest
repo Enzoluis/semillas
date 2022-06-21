@@ -1,0 +1,35 @@
+import parcelasPropias.*
+import plantas.*
+
+describe "parcelasTest"{
+	
+		const parcela = new Ecologica(ancho=20,largo=1,hsSol=8)
+		const s1 = new Soja(altura=1.1, anioCosecha= 2009)
+		const s2 = new Soja(altura=1.2, anioCosecha= 2009)
+		const s3 = new Soja(altura=1.1, anioCosecha= 2009)
+		const s4 = new Soja(altura=1.3, anioCosecha= 2009)
+		const s5 = new Menta(altura=1,anioCosecha=2007)
+		
+		method initialize(){
+			parcela.plantar(s1)
+	 		parcela.plantar(s2)
+	 		parcela.plantar(s3)
+	 		parcela.plantar(s4)
+		}
+		
+	test"superficie=20m2 "{	
+		
+		assert.equals(20,parcela.superficie())
+	}
+	test"cantMaxima=4"{
+		
+		assert.equals(4,parcela.cantMaxima())
+	}
+	
+	test"Cero complicaciones"{
+		assert.notThat(parcela.complicaciones())
+	}
+	test"estamos Complicados"{
+		assert.throwsExceptionWithMessage("Error demasiadas cosecha",{parcela.plantar(s5)})
+	}
+}
